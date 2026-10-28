@@ -1,4 +1,4 @@
-```python
+
 from pathlib import Path
 
 import pandas as pd
@@ -605,4 +605,3 @@ st.caption(
     "Power System Data Analytics 774 | Solar PV Performance "
     "Analysis | Descriptive analysis and visualisation"
 )
-```
