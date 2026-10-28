@@ -287,38 +287,6 @@ if filtered_df.empty:
     )
     st.stop()
 
-# Hour selector
-hour_options = ["All hours"] + list(range(24))
-
-selected_hour = st.sidebar.selectbox(
-    "Select Hour",
-    options=hour_options,
-    format_func=lambda hour: (
-        hour if hour == "All hours"
-        else f"{hour:02d}:00 - {hour:02d}:59"
-    ),
-    index=0
-)
-
-# Apply filters
-filtered_df = df[
-    (df["DATE_TIME"].dt.date >= start_date)
-    & (df["DATE_TIME"].dt.date <= end_date)
-    & (df["Month"].isin(selected_months))
-].copy()
-
-if selected_hour != "All hours":
-    filtered_df = filtered_df[
-        filtered_df["Hour"] == selected_hour
-    ].copy()
-
-if filtered_df.empty:
-    st.warning(
-        "No records match the selected filters. "
-        "Please change your selections."
-    )
-    st.stop()
-
 # --------------------------------------------------
 # 7. KEY PERFORMANCE INDICATORS
 # --------------------------------------------------
