@@ -145,9 +145,9 @@ st.title("Solar PV Performance Analysis Dashboard")
 
 st.markdown(
     """
-    This dashboard explores photovoltaic system performance
-    by examining solar irradiation, module temperature,
-    AC power output, and changes over time.
+    This dashboard explores PV system performance
+    by examining solar irradiation, module temperature and
+    AC power output
     """
 )
 
