@@ -330,8 +330,7 @@ overview_tab, irradiation_tab, temperature_tab, data_tab = st.tabs(
     [
         "Overview",
         "Irradiation and Power",
-        "Temperature and Power",
-        "Data Quality"
+        "Temperature and Power"
     ]
 )
 
@@ -529,79 +528,6 @@ with temperature_tab:
         indicates that temperature is not the sole factor affecting power
         generation, and very high temperatures may reduce PV efficiency.
         """
-    )
-
-
-# --------------------------------------------------
-# 12. DATA QUALITY AND CORRELATION
-# --------------------------------------------------
-
-with data_tab:
-
-    st.subheader("Dataset Summary")
-
-    summary_col1, summary_col2, summary_col3 = st.columns(3)
-
-    summary_col1.metric(
-        "Usable Records",
-        f"{len(df):,}"
-    )
-
-    summary_col2.metric(
-        "Filtered Records",
-        f"{len(filtered_df):,}"
-    )
-
-    summary_col3.metric(
-        "Date Coverage",
-        f"{df['DATE_TIME'].min():%d %b %Y} – "
-        f"{df['DATE_TIME'].max():%d %b %Y}"
-    )
-
-    st.subheader("Missing Values After Cleaning")
-
-    missing_df = (
-        df[REQUIRED_COLUMNS]
-        .isna()
-        .sum()
-        .rename("Missing Values")
-        .reset_index()
-        .rename(columns={"index": "Variable"})
-    )
-
-    st.dataframe(
-        missing_df,
-        use_container_width=True,
-        hide_index=True
-    )
-
-    st.subheader("Correlation Between Variables")
-
-    correlation_df = filtered_df[
-        [
-            "AC_POWER",
-            "IRRADIATION",
-            "MODULE_TEMPERATURE"
-        ]
-    ].corr()
-
-    fig_corr = px.imshow(
-        correlation_df,
-        text_auto=".2f",
-        color_continuous_scale="RdBu_r",
-        zmin=-1,
-        zmax=1,
-        aspect="auto",
-        title="Correlation Heatmap"
-    )
-
-    fig_corr.update_layout(
-        template="plotly_white"
-    )
-
-    st.plotly_chart(
-        fig_corr,
-        use_container_width=True
     )
 
 
