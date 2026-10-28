@@ -2,7 +2,6 @@ from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
 import streamlit as st
 
 
@@ -41,7 +40,7 @@ st.markdown(
 
         div[data-testid="stMetricValue"] {
             color: #0284C7;
-            font-size: 1.6rem;   /* reduced KPI value size */
+            font-size: 1.6rem;
             line-height: 1.2;
         }
 
@@ -66,101 +65,6 @@ REQUIRED_COLUMNS = [
     "MODULE_TEMPERATURE"
 ]
 
-
-@st.cache_data
-def load_data(file_bytes=None, local_file=None):
-
-    if file_bytes is not None:
-        from io import BytesIO
-        data = pd.read_csv(BytesIO(file_bytes))
-
-    elif local_file is not None:
-        data = pd.read_csv(local_file)
-
-    else:
-        raise FileNotFoundError(
-            "No CSV file was supplied."
-        )
-
-    # Remove spaces from column names
-    data.columns = data.columns.str.strip()
-
-    # Check required columns
-    missing_columns = [
-        col for col in REQUIRED_COLUMNS
-        if col not in data.columns
-    ]
-
-    if missing_columns:
-        raise ValueError(
-            "The dataset is missing these required columns: "
-            + ", ".join(missing_columns)
-        )
-
-    # Convert timestamp
-    data["DATE_TIME"] = pd.to_datetime(
-        data["DATE_TIME"],
-        errors="coerce"
-    )
-
-    # Convert measurements to numeric values
-    numeric_columns = [
-        "AC_POWER",
-        "IRRADIATION",
-        "MODULE_TEMPERATURE"
-    ]
-
-    for column in numeric_columns:
-        data[column] = pd.to_numeric(
-            data[column],
-            errors="coerce"
-        )
-
-    # Remove rows without essential information
-    data = data.dropna(
-        subset=REQUIRED_COLUMNS
-    ).copy()
-
-    # Remove impossible negative measurements
-    # This assumes the dataset represents non-negative
-    # PV output and non-negative solar irradiation.
-    data = data[
-        (data["AC_POWER"] >= 0)
-        & (data["IRRADIATION"] >= 0)
-    ].copy()
-
-    # Create time-based variables
-    data["Date"] = data["DATE_TIME"].dt.date
-    data["Hour"] = data["DATE_TIME"].dt.hour
-    data["Month"] = data["DATE_TIME"].dt.strftime("%B")
-
-    return data
-
-
-# --------------------------------------------------
-# 4. DASHBOARD HEADER
-# --------------------------------------------------
-
-st.title("Solar PV Performance Analysis Dashboard")
-
-st.markdown(
-    """
-    This dashboard explores PV system performance
-    by examining solar irradiation, module temperature and
-    AC power output
-    """
-)
-
-st.info(
-    "**Research question:** How are solar irradiation and "
-    "module temperature related to PV power output?"
-)
-
-# --------------------------------------------------
-# 5. LOAD THE DATASET (NO UPLOAD OPTION)
-# --------------------------------------------------
-
-st.sidebar.header("Dashboard Filters")
 
 @st.cache_data
 def load_data(file_path):
@@ -210,7 +114,32 @@ def load_data(file_path):
     return data
 
 
-# Load CSV from the same folder as app.py
+# --------------------------------------------------
+# 4. DASHBOARD HEADER
+# --------------------------------------------------
+
+st.title("Solar PV Performance Analysis Dashboard")
+
+st.markdown(
+    """
+    This dashboard explores photovoltaic system performance
+    by examining solar irradiation, module temperature,
+    AC power output, and changes over time.
+    """
+)
+
+st.info(
+    "**Research question:** How are solar irradiation and "
+    "module temperature related to photovoltaic power output?"
+)
+
+
+# --------------------------------------------------
+# 5. LOAD THE DATASET
+# --------------------------------------------------
+
+st.sidebar.header("Dashboard Filters")
+
 csv_path = Path(__file__).parent / "SolarPV_Cleaned_Data.csv"
 
 try:
@@ -226,7 +155,6 @@ try:
 except Exception as error:
     st.error(f"Unable to load the dataset: {error}")
     st.stop()
-
 
 if df.empty:
     st.error("No valid records remain after data cleaning.")
@@ -283,13 +211,13 @@ filtered_df = df[
     & (df["Hour"] <= hour_selection[1])
 ].copy()
 
-
 if filtered_df.empty:
     st.warning(
         "No records match the selected filters. "
         "Please change your selections."
     )
     st.stop()
+
 
 # --------------------------------------------------
 # 7. KEY PERFORMANCE INDICATORS
@@ -326,7 +254,7 @@ st.divider()
 # 8. DASHBOARD TABS
 # --------------------------------------------------
 
-overview_tab, irradiation_tab, temperature_tab, data_tab = st.tabs(
+overview_tab, irradiation_tab, temperature_tab = st.tabs(
     [
         "Overview",
         "Irradiation and Power",
@@ -474,7 +402,7 @@ with irradiation_tab:
         """
         **Interpretation:** A positive correlation indicates that
         higher irradiation is generally associated with higher
-        AC power output.
+        AC power output. Correlation alone does not prove causation.
         """
     )
 
@@ -497,7 +425,7 @@ with temperature_tab:
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
             "AC_POWER": "AC Power (kW)",
-            "IRRADIATION": "Irradiation"
+            "IRRADIATION": "Irradiation (W/m²)"
         },
         hover_data=["DATE_TIME"]
     )
@@ -522,17 +450,17 @@ with temperature_tab:
 
     st.markdown(
         """
-        **Interpretation:** Higher module temperatures are generally associated 
-        with increased AC power output because they typically occur during periods
-        of strong solar irradiation. However, the scattered distribution of points
-        indicates that temperature is not the sole factor affecting power
-        generation, and very high temperatures may reduce PV efficiency.
+        **Interpretation:** This chart shows how AC power varies
+        with module temperature. The colour represents irradiation,
+        helping distinguish temperature patterns under different
+        sunlight conditions. The relationship should not be
+        interpreted as a causal effect without further analysis.
         """
     )
 
 
 # --------------------------------------------------
-# 13. FOOTER
+# 12. FOOTER
 # --------------------------------------------------
 
 st.divider()
