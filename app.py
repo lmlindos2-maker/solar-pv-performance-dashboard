@@ -616,5 +616,5 @@ with data_tab:
 st.divider()
 
 st.caption(
-    "Power System Data Analytics 774 | Solar PV Performance"
+    "Power System Data Analytics 774 | Solar PV Performance Analysis"
 )
