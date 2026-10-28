@@ -229,12 +229,12 @@ col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(
     "Average AC Power",
-    f"{filtered_df['AC_POWER'].mean():,.3f} "
+    f"{filtered_df['AC_POWER'].mean():,.3f} kW"
 )
 
 col2.metric(
     "Peak AC Power",
-    f"{filtered_df['AC_POWER'].max():,.3f} "
+    f"{filtered_df['AC_POWER'].max():,.3f} kW"
 )
 
 col3.metric(
@@ -276,7 +276,7 @@ with overview_tab:
     fig_time = px.line(
         time_df,
         x="DATE_TIME",
-        y="AC_POWER",
+        y="AC_POWER (kW)",
         title="Photovoltaic AC Power Output Over Time",
         labels={
             "DATE_TIME": "Date and Time",
@@ -308,7 +308,7 @@ with overview_tab:
         fig_month = px.bar(
             monthly_df,
             x="Month",
-            y="AC_POWER",
+            y="AC_POWER (kW)",
             title="Average AC Power by Month",
             labels={
                 "Month": "Month",
@@ -338,7 +338,7 @@ with overview_tab:
         fig_hour = px.line(
             hourly_df,
             x="Hour",
-            y="AC_POWER",
+            y="AC_POWER (kW)",
             markers=True,
             title="Average Daily Power Profile",
             labels={
@@ -369,7 +369,7 @@ with irradiation_tab:
     fig_irradiation = px.scatter(
         filtered_df,
         x="IRRADIATION",
-        y="AC_POWER",
+        y="AC_POWER (kW)",
         opacity=0.55,
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
@@ -418,7 +418,7 @@ with temperature_tab:
     fig_temperature = px.scatter(
         filtered_df,
         x="MODULE_TEMPERATURE",
-        y="AC_POWER",
+        y="AC_POWER (kW)",
         color="IRRADIATION",
         opacity=0.65,
         title="Module Temperature vs AC Power Output",
