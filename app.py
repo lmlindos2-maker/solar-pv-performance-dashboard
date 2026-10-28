@@ -41,6 +41,10 @@ st.markdown(
             border-radius: 10px;
         }
 
+        div[data-testid="stMetricValue"] {
+            color: #0284C7;
+        }
+
         .section-note {
             color: #526477;
             font-size: 14px;
