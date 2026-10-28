@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 import pandas as pd
@@ -615,15 +614,6 @@ with data_tab:
         filtered_df.head(100),
         use_container_width=True,
         hide_index=True
-    )
-
-    csv_data = filtered_df.to_csv(index=False).encode("utf-8")
-
-    st.download_button(
-        label="Download Filtered Data as CSV",
-        data=csv_data,
-        file_name="solar_pv_filtered_data.csv",
-        mime="text/csv"
     )
 
 
