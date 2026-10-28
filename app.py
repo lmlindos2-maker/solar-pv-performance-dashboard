@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 
@@ -239,7 +240,7 @@ col2.metric(
 
 col3.metric(
     "Average Irradiation",
-    f"{filtered_df['IRRADIATION'].mean():,.3f} "
+    f"{filtered_df['IRRADIATION'].mean():,.3f} W/m²"
 )
 
 col4.metric(
@@ -276,7 +277,7 @@ with overview_tab:
     fig_time = px.line(
         time_df,
         x="DATE_TIME",
-        y="AC_POWER (kW)",
+        y="AC_POWER",
         title="Photovoltaic AC Power Output Over Time",
         labels={
             "DATE_TIME": "Date and Time",
@@ -312,7 +313,7 @@ with overview_tab:
             title="Average AC Power by Month",
             labels={
                 "Month": "Month",
-                "AC_POWER": "Average AC Power"
+                "AC_POWER": "Average AC Power (kW)"
             },
             text_auto=".3f"
         )
@@ -343,7 +344,7 @@ with overview_tab:
             title="Average Daily Power Profile",
             labels={
                 "Hour": "Hour of Day",
-                "AC_POWER": "Average AC Power"
+                "AC_POWER": "Average AC Power (kW)"
             }
         )
 
@@ -374,7 +375,7 @@ with irradiation_tab:
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
         labels={
-            "IRRADIATION": "Irradiation",
+            "IRRADIATION": "Irradiation (W/m²)",
             "AC_POWER": "AC Power (kW)"
         },
         hover_data=["DATE_TIME"]
@@ -425,7 +426,7 @@ with temperature_tab:
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
             "AC_POWER": "AC Power (kW)",
-            "IRRADIATION": "Irradiation"
+            "IRRADIATION": "Irradiation (W/m²)"
         },
         hover_data=["DATE_TIME"]
     )
