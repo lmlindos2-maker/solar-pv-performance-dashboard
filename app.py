@@ -475,7 +475,7 @@ with irradiation_tab:
         """
         **Interpretation:** A positive correlation indicates that
         higher irradiation is generally associated with higher
-        AC power output. Correlation alone does not prove causation.
+        AC power output.
         """
     )
 
@@ -523,11 +523,11 @@ with temperature_tab:
 
     st.markdown(
         """
-        **Interpretation:** This chart shows how AC power varies
-        with module temperature. The colour represents irradiation,
-        helping distinguish temperature patterns under different
-        sunlight conditions. The relationship should not be
-        interpreted as a causal effect without further analysis.
+        **Interpretation:** Higher module temperatures are generally associated 
+        with increased AC power output because they typically occur during periods
+        of strong solar irradiation. However, the scattered distribution of points
+        indicates that temperature is not the sole factor affecting power
+        generation, and very high temperatures may reduce PV efficiency.
         """
     )
 
