@@ -618,3 +618,6 @@ st.divider()
 st.caption(
     "Power System Data Analytics 774 | Solar PV Performance Analysis"
 )
+st.caption(
+    "Data source: Solar Power Generation Data, Kaggle, published by Anikannal (2020)."
+)
