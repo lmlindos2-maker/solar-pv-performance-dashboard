@@ -357,7 +357,7 @@ with overview_tab:
         title="Photovoltaic AC Power Output Over Time",
         labels={
             "DATE_TIME": "Date and Time",
-            "AC_POWER": "AC Power (dataset units)"
+            "AC_POWER": "AC Power (kW)"
         }
     )
 
@@ -389,7 +389,7 @@ with overview_tab:
             title="Average AC Power by Month",
             labels={
                 "Month": "Month",
-                "AC_POWER": "Average AC Power (dataset units)"
+                "AC_POWER": "Average AC Power (kW)"
             },
             text_auto=".3f"
         )
@@ -420,7 +420,7 @@ with overview_tab:
             title="Average Daily Power Profile",
             labels={
                 "Hour": "Hour of Day",
-                "AC_POWER": "Average AC Power (dataset units)"
+                "AC_POWER": "Average AC Power (kW)"
             }
         )
 
@@ -451,8 +451,8 @@ with irradiation_tab:
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
         labels={
-            "IRRADIATION": "Irradiation (dataset units)",
-            "AC_POWER": "AC Power (dataset units)"
+            "IRRADIATION": "Irradiation (W/m²)",
+            "AC_POWER": "AC Power (kW)"
         },
         hover_data=["DATE_TIME"]
     )
@@ -501,7 +501,7 @@ with temperature_tab:
         title="Module Temperature vs AC Power Output",
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
-            "AC_POWER": "AC Power (dataset units)",
+            "AC_POWER": "AC Power (kW)",
             "IRRADIATION": "Irradiation"
         },
         hover_data=["DATE_TIME"]
