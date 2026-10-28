@@ -299,17 +299,17 @@ col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(
     "Average AC Power",
-    f"{filtered_df['AC_POWER'].mean():,.3f}"
+    f"{filtered_df['AC_POWER'].mean():,.3f} kW"
 )
 
 col2.metric(
     "Peak AC Power",
-    f"{filtered_df['AC_POWER'].max():,.3f}"
+    f"{filtered_df['AC_POWER'].max():,.3f} kW"
 )
 
 col3.metric(
     "Average Irradiation",
-    f"{filtered_df['IRRADIATION'].mean():,.3f}"
+    f"{filtered_df['IRRADIATION'].mean():,.3f} W/m²"
 )
 
 col4.metric(
