@@ -13,7 +13,6 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Solar PV Performance Dashboard",
-    page_icon="☀️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -141,7 +140,7 @@ def load_data(file_bytes=None, local_file=None):
 # 4. DASHBOARD HEADER
 # --------------------------------------------------
 
-st.title("☀️ Solar PV Performance Analysis Dashboard")
+st.title("Solar PV Performance Analysis Dashboard")
 
 st.markdown(
     """
