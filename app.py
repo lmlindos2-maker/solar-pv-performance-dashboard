@@ -280,7 +280,7 @@ with overview_tab:
         title="Photovoltaic AC Power Output Over Time",
         labels={
             "DATE_TIME": "Date and Time",
-            "AC_POWER": "AC Power"
+            "AC_POWER": "AC Power (kW)"
         }
     )
 
@@ -308,7 +308,7 @@ with overview_tab:
         fig_month = px.bar(
             monthly_df,
             x="Month",
-            y="AC_POWER (kW)",
+            y="AC_POWER",
             title="Average AC Power by Month",
             labels={
                 "Month": "Month",
@@ -338,7 +338,7 @@ with overview_tab:
         fig_hour = px.line(
             hourly_df,
             x="Hour",
-            y="AC_POWER (kW)",
+            y="AC_POWER",
             markers=True,
             title="Average Daily Power Profile",
             labels={
@@ -369,13 +369,13 @@ with irradiation_tab:
     fig_irradiation = px.scatter(
         filtered_df,
         x="IRRADIATION",
-        y="AC_POWER (kW)",
+        y="AC_POWER",
         opacity=0.55,
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
         labels={
             "IRRADIATION": "Irradiation",
-            "AC_POWER": "AC Power"
+            "AC_POWER": "AC Power (kW)"
         },
         hover_data=["DATE_TIME"]
     )
@@ -418,13 +418,13 @@ with temperature_tab:
     fig_temperature = px.scatter(
         filtered_df,
         x="MODULE_TEMPERATURE",
-        y="AC_POWER (kW)",
+        y="AC_POWER",
         color="IRRADIATION",
         opacity=0.65,
         title="Module Temperature vs AC Power Output",
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
-            "AC_POWER": "AC Power",
+            "AC_POWER": "AC Power (kW)",
             "IRRADIATION": "Irradiation"
         },
         hover_data=["DATE_TIME"]
