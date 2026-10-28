@@ -608,14 +608,6 @@ with data_tab:
         use_container_width=True
     )
 
-    st.subheader("Preview of Cleaned Data")
-
-    st.dataframe(
-        filtered_df.head(100),
-        use_container_width=True,
-        hide_index=True
-    )
-
 
 # --------------------------------------------------
 # 13. FOOTER
