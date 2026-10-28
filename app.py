@@ -41,7 +41,7 @@ st.markdown(
 
         div[data-testid="stMetricValue"] {
             color: #0284C7;
-            font-size: 1rem;   /* reduced KPI value size */
+            font-size: 1.6rem;   /* reduced KPI value size */
             line-height: 1.2;
         }
 
