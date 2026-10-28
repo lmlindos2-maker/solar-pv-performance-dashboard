@@ -45,7 +45,7 @@ st.markdown(
 
         .section-note {
             color: #526477;
-            font-size: 14px;
+            font-size: 10px;
         }
     </style>
     """,
