@@ -240,7 +240,7 @@ col2.metric(
 
 col3.metric(
     "Average Irradiation",
-    f"{filtered_df['IRRADIATION'].mean():,.3f} W/m²"
+    f"{filtered_df['IRRADIATION'].mean():,.3f} "
 )
 
 col4.metric(
@@ -375,7 +375,7 @@ with irradiation_tab:
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
         labels={
-            "IRRADIATION": "Irradiation (W/m²)",
+            "IRRADIATION": "Irradiation",
             "AC_POWER": "AC Power (kW)"
         },
         hover_data=["DATE_TIME"]
@@ -426,7 +426,7 @@ with temperature_tab:
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
             "AC_POWER": "AC Power (kW)",
-            "IRRADIATION": "Irradiation (W/m²)"
+            "IRRADIATION": "Irradiation"
         },
         hover_data=["DATE_TIME"]
     )
