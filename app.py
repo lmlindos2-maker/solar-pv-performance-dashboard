@@ -229,17 +229,17 @@ col1, col2, col3, col4 = st.columns(4)
 
 col1.metric(
     "Average AC Power",
-    f"{filtered_df['AC_POWER'].mean():,.3f} kW"
+    f"{filtered_df['AC_POWER'].mean():,.3f} "
 )
 
 col2.metric(
     "Peak AC Power",
-    f"{filtered_df['AC_POWER'].max():,.3f} kW"
+    f"{filtered_df['AC_POWER'].max():,.3f} "
 )
 
 col3.metric(
     "Average Irradiation",
-    f"{filtered_df['IRRADIATION'].mean():,.3f} W/m²"
+    f"{filtered_df['IRRADIATION'].mean():,.3f} "
 )
 
 col4.metric(
@@ -280,7 +280,7 @@ with overview_tab:
         title="Photovoltaic AC Power Output Over Time",
         labels={
             "DATE_TIME": "Date and Time",
-            "AC_POWER": "AC Power (kW)"
+            "AC_POWER": "AC Power"
         }
     )
 
@@ -312,7 +312,7 @@ with overview_tab:
             title="Average AC Power by Month",
             labels={
                 "Month": "Month",
-                "AC_POWER": "Average AC Power (kW)"
+                "AC_POWER": "Average AC Power"
             },
             text_auto=".3f"
         )
@@ -343,7 +343,7 @@ with overview_tab:
             title="Average Daily Power Profile",
             labels={
                 "Hour": "Hour of Day",
-                "AC_POWER": "Average AC Power (kW)"
+                "AC_POWER": "Average AC Power"
             }
         )
 
@@ -374,8 +374,8 @@ with irradiation_tab:
         trendline="ols",
         title="Solar Irradiation vs AC Power Output",
         labels={
-            "IRRADIATION": "Irradiation (W/m²)",
-            "AC_POWER": "AC Power (kW)"
+            "IRRADIATION": "Irradiation",
+            "AC_POWER": "AC Power"
         },
         hover_data=["DATE_TIME"]
     )
@@ -424,8 +424,8 @@ with temperature_tab:
         title="Module Temperature vs AC Power Output",
         labels={
             "MODULE_TEMPERATURE": "Module Temperature (°C)",
-            "AC_POWER": "AC Power (kW)",
-            "IRRADIATION": "Irradiation (W/m²)"
+            "AC_POWER": "AC Power",
+            "IRRADIATION": "Irradiation"
         },
         hover_data=["DATE_TIME"]
     )
