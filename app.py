@@ -152,37 +152,72 @@ st.info(
     "module temperature related to photovoltaic power output?"
 )
 
-
 # --------------------------------------------------
-# 5. LOAD THE DATASET
+# 5. LOAD THE DATASET (NO UPLOAD OPTION)
 # --------------------------------------------------
 
-st.sidebar.header("Dataset")
+st.sidebar.header("Dashboard Filters")
 
-uploaded_file = st.sidebar.file_uploader(
-    "Upload SolarPV_Cleaned_Data.csv",
-    type=["csv"]
-)
+@st.cache_data
+def load_data(file_path):
+    data = pd.read_csv(file_path)
 
-local_csv = Path(__file__).parent / "SolarPV_Cleaned_Data.csv"
+    data.columns = data.columns.str.strip()
+
+    missing_columns = [
+        col for col in REQUIRED_COLUMNS
+        if col not in data.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            "Missing required columns: "
+            + ", ".join(missing_columns)
+        )
+
+    data["DATE_TIME"] = pd.to_datetime(
+        data["DATE_TIME"],
+        errors="coerce"
+    )
+
+    for column in [
+        "AC_POWER",
+        "IRRADIATION",
+        "MODULE_TEMPERATURE"
+    ]:
+        data[column] = pd.to_numeric(
+            data[column],
+            errors="coerce"
+        )
+
+    data = data.dropna(
+        subset=REQUIRED_COLUMNS
+    ).copy()
+
+    data = data[
+        (data["AC_POWER"] >= 0)
+        & (data["IRRADIATION"] >= 0)
+    ].copy()
+
+    data["Date"] = data["DATE_TIME"].dt.date
+    data["Hour"] = data["DATE_TIME"].dt.hour
+    data["Month"] = data["DATE_TIME"].dt.strftime("%B")
+
+    return data
+
+
+# Load CSV from the same folder as app.py
+csv_path = Path(__file__).parent / "SolarPV_Cleaned_Data.csv"
 
 try:
-    if uploaded_file is not None:
-        df = load_data(
-            file_bytes=uploaded_file.getvalue()
-        )
-
-    elif local_csv.exists():
-        df = load_data(
-            local_file=str(local_csv)
-        )
-
-    else:
-        st.warning(
-            "Upload SolarPV_Cleaned_Data.csv using the sidebar, "
-            "or place the CSV file in the same folder as app.py."
+    if not csv_path.exists():
+        st.error(
+            "SolarPV_Cleaned_Data.csv was not found. "
+            "Please add the dataset to the same folder as app.py."
         )
         st.stop()
+
+    df = load_data(str(csv_path))
 
 except Exception as error:
     st.error(f"Unable to load the dataset: {error}")
@@ -190,18 +225,13 @@ except Exception as error:
 
 
 if df.empty:
-    st.error(
-        "No valid records remain after data cleaning. "
-        "Check the dataset before continuing."
-    )
+    st.error("No valid records remain after data cleaning.")
     st.stop()
 
 
 # --------------------------------------------------
 # 6. INTERACTIVE FILTERS
 # --------------------------------------------------
-
-st.sidebar.header("Dashboard Filters")
 
 min_date = df["DATE_TIME"].min().date()
 max_date = df["DATE_TIME"].max().date()
@@ -224,8 +254,8 @@ else:
     start_date = end_date = date_selection
 
 
-available_months = list(
-    df.sort_values("DATE_TIME")["Month"].drop_duplicates()
+available_months = (
+    df.sort_values("DATE_TIME")["Month"].drop_duplicates().tolist()
 )
 
 selected_months = st.sidebar.multiselect(
@@ -256,7 +286,6 @@ if filtered_df.empty:
         "Please change your selections."
     )
     st.stop()
-
 
 # --------------------------------------------------
 # 7. KEY PERFORMANCE INDICATORS
