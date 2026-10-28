@@ -319,12 +319,6 @@ col4.metric(
     f"{filtered_df['MODULE_TEMPERATURE'].mean():,.2f} °C"
 )
 
-st.caption(
-    "KPI values update when the dashboard filters change. "
-    "Confirm the units of AC_POWER and IRRADIATION from "
-    "the dataset documentation before reporting them."
-)
-
 st.divider()
 
 
