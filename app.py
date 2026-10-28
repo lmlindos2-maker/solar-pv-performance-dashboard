@@ -153,7 +153,7 @@ st.markdown(
 
 st.info(
     "**Research question:** How are solar irradiation and "
-    "module temperature related to photovoltaic power output?"
+    "module temperature related to PV power output?"
 )
 
 # --------------------------------------------------
