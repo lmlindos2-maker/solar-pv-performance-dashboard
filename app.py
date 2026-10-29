@@ -40,14 +40,14 @@ st.markdown(
         }
 
         div[data-testid="stMetricLabel"] {
-            color: #059669;
-            font-weight: 600;
+            color: #059669 !important;
+            font-weight: 600 !important;
         }
 
         div[data-testid="stMetricValue"] {
-            color: #0284C7;
-            font-size: 1.6rem;
-            line-height: 1.2;
+            color: #0284C7 !important;
+            font-size: 1.6rem !important;
+            line-height: 1.2 !important;
         }
 
         .section-note {
