@@ -39,6 +39,11 @@ st.markdown(
             border-radius: 10px;
         }
 
+        div[data-testid="stMetricLabel"] {
+            color: #059669;
+            font-weight: 600;
+        }
+
         div[data-testid="stMetricValue"] {
             color: #0284C7;
             font-size: 1.6rem;
