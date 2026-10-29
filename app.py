@@ -41,7 +41,7 @@ st.markdown(
 
         div[data-testid="stMetricLabel"] {
             color: #50C878 !important;
-            font-weight: 600 !important;
+            font-weight: bold;
         }
 
         div[data-testid="stMetricValue"] {
