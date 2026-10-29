@@ -24,27 +24,30 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        .main {
+        /* Modern Streamlit app container */
+        .stApp {
             background-color: #F7F9FC;
         }
 
         h1, h2, h3 {
-            color: #17324D;
+            color: #17324D !important;
         }
 
-        div[data-testid="stMetric"] {
-            background-color: #F5F7FA; /* #F0F2F6 */
+        [data-testid="stMetric"] {
+            background-color: #F5F7FA;
             border: 1px solid #DCE3EB;
             padding: 16px;
             border-radius: 10px;
         }
 
-        div[data-testid="stMetricLabel"] {
-            color: #059669 !important;  /* Dark Emerald Green */
-            font-weight: bold;
+        [data-testid="stMetricLabel"],
+        [data-testid="stMetricLabel"] * {
+            color: #059669 !important;
+            font-weight: bold !important;
         }
 
-        div[data-testid="stMetricValue"] {
+        [data-testid="stMetricValue"],
+        [data-testid="stMetricValue"] * {
             color: #0284C7 !important;
             font-size: 1.6rem !important;
             line-height: 1.2 !important;
@@ -477,3 +480,269 @@ st.caption(
 st.caption(
     "Data source: Solar Power Generation Data, Kaggle, published by Anikannal (2020)."
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
