@@ -40,7 +40,7 @@ st.markdown(
         }
 
         div[data-testid="stMetricLabel"] {
-            color: #6EE7B7 !important;
+            color: #059669 !important;  /* Dark Emerald Green */
             font-weight: bold;
         }
 
