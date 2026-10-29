@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 
@@ -23,33 +24,25 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* Modern Streamlit app container */
-        .stApp {
+        .main {
             background-color: #F7F9FC;
         }
 
         h1, h2, h3 {
-            color: #17324D !important;
+            color: #17324D;
         }
 
-        [data-testid="stMetric"] {
-            background-color: #F5F7FA;
+        div[data-testid="stMetric"] {
+            background-color: #F0F2F6;
             border: 1px solid #DCE3EB;
             padding: 16px;
             border-radius: 10px;
         }
 
-        [data-testid="stMetricLabel"],
-        [data-testid="stMetricLabel"] * {
-            color: #059669 !important;
-            font-weight: bold !important;
-        }
-
-        [data-testid="stMetricValue"],
-        [data-testid="stMetricValue"] * {
-            color: #0284C7 !important;
-            font-size: 1.6rem !important;
-            line-height: 1.2 !important;
+        div[data-testid="stMetricValue"] {
+            color: #0284C7;
+            font-size: 1.6rem;
+            line-height: 1.2;
         }
 
         .section-note {
@@ -479,126 +472,3 @@ st.caption(
 st.caption(
     "Data source: Solar Power Generation Data, Kaggle, published by Anikannal (2020)."
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-"""
