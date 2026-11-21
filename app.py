@@ -11,7 +11,7 @@ import streamlit as st
 # --------------------------------------------------
 
 st.set_page_config(
-    page_title="Solar PV Performance Dashboard",
+    page_title="Solar PV Performance Analysis Dashboard",
     layout="wide",
     initial_sidebar_state="expanded"
 )
